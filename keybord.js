@@ -386,20 +386,29 @@ const data = [
     },
   ],
 ];
-
+let positionCursor;
 /* console.log(data); */
 const body = document.body;
 const functionalityKey = {
   backspace: function (textArea) {
+    positionCursor = textArea.selectionStart;
     let txField = textArea.value.split("");
     txField.splice(textArea.selectionStart - 1, 1);
     textArea.value = txField.join("");
+    textArea.focus();
+    textArea.selectionStart = positionCursor - 1;
+    textArea.selectionEnd = positionCursor - 1;
   },
   del: function (textArea) {
+    positionCursor = textArea.selectionStart;
     let txField = textArea.value.split("");
     txField.splice(textArea.selectionStart, 1);
     textArea.value = txField.join("");
+    textArea.focus();
+    textArea.selectionStart = positionCursor;
+    textArea.selectionEnd = positionCursor;
   },
+
   enter: function () {
     fieldText.value += "\n";
   },
@@ -477,7 +486,7 @@ function clickButton(e) {
   } else {
     fieldText.value += e.key;
   }
-  textArea.focus();
+  /*  textArea.focus(); */
 }
 document.addEventListener("keydown", clickButtonOnKeyboard);
 

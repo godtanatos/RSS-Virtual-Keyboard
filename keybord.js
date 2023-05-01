@@ -419,10 +419,21 @@ const functionalityKey = {
       .classList.toggle("green__key");
   },
   "Caps Lock": function () {
+    console.log("{eqyz");
     LockState ? (LockState = false) : (LockState = true);
     document
       .querySelector(`.key[data-key-code="20"]`)
       .classList.toggle("green__key");
+  },
+  tab: function () {
+    textArea.focus();
+    fieldText.value += "\t";
+    textArea.selectionStart += 1;
+  },
+  Tab: function () {
+    textArea.focus();
+    textArea.selectionStart += 1;
+    fieldText.value += "\t";
   },
 };
 
@@ -484,7 +495,9 @@ function clickButton(e) {
       }
     }
   } else {
-    fieldText.value += e.key;
+    LockState
+      ? (fieldText.value += e.key.toUpperCase())
+      : (fieldText.value += e.key);
   }
   /*  textArea.focus(); */
 }
@@ -499,8 +512,9 @@ function removeStyleDownButton(e) {
   }
 }
 function clickButtonOnKeyboard(e) {
+  console.log(e);
+  textArea.blur();
   let curEl = document.querySelector(`.key[data-key-code="${e.keyCode}"]`);
-  console.log(curEl.innerText);
   if (!functionalityKey[curEl.firstChild.innerText.toLowerCase()]) {
     if (curEl) {
       console.log(curEl);
@@ -510,6 +524,8 @@ function clickButtonOnKeyboard(e) {
     }
   } else {
     textArea.focus();
+    console.log(e.key);
+    functionalityKey[e.key]();
     curEl.classList.add("active");
     document.addEventListener("keyup", removeStyleDownButton);
   }
@@ -556,6 +572,7 @@ function changeLanguage() {
   keyboard += `</div>`;
   keyboardDom.innerHTML = keyboard;
 }
+
 window.onkeydown = (evt) => {
   if (evt.key == "Tab") {
     evt.preventDefault();

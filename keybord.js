@@ -387,7 +387,6 @@ const data = [
   ],
 ];
 let positionCursor;
-/* console.log(data); */
 const body = document.body;
 const functionalityKey = {
   backspace: function (textArea) {
@@ -419,7 +418,6 @@ const functionalityKey = {
       .classList.toggle("green__key");
   },
   "Caps Lock": function () {
-    console.log("{eqyz");
     LockState ? (LockState = false) : (LockState = true);
     document
       .querySelector(`.key[data-key-code="20"]`)
@@ -472,7 +470,6 @@ function clickButton(e) {
       e.target.parentElement.className == "key" ||
       e.target.parentElement.className == "key green__key"
     ) {
-      console.log(e);
       if (functionalityKey[e.target.innerText.toLowerCase()]) {
         functionalityKey[e.target.innerText.toLowerCase()](textArea);
       } else {
@@ -485,7 +482,6 @@ function clickButton(e) {
       e.target.className == "key" ||
       e.target.className == "key green__key"
     ) {
-      console.log(functionalityKey[e.target.innerText]);
       if (functionalityKey[e.target.innerText.toLowerCase()]) {
         functionalityKey[e.target.innerText.toLowerCase()](textArea);
       } else {
@@ -512,19 +508,16 @@ function removeStyleDownButton(e) {
   }
 }
 function clickButtonOnKeyboard(e) {
-  console.log(e);
   textArea.blur();
   let curEl = document.querySelector(`.key[data-key-code="${e.keyCode}"]`);
   if (!functionalityKey[curEl.firstChild.innerText.toLowerCase()]) {
     if (curEl) {
-      console.log(curEl);
       curEl.classList.add("active");
       clickButton(e);
       document.addEventListener("keyup", removeStyleDownButton);
     }
   } else {
     textArea.focus();
-    console.log(e.key);
     functionalityKey[e.key]();
     curEl.classList.add("active");
     document.addEventListener("keyup", removeStyleDownButton);

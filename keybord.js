@@ -517,6 +517,7 @@ function clickButton(e) {
         }
       }
     }
+    textArea.focus();
   } else {
     if (e.key.length < 2) {
       LockState
@@ -524,7 +525,6 @@ function clickButton(e) {
         : (fieldText.value += e.key);
     }
   }
-  textArea.focus();
 }
 document.addEventListener("keydown", clickButtonOnKeyboard);
 

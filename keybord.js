@@ -410,34 +410,41 @@ const functionalityKey = {
 
   enter: function () {
     fieldText.value += "\n";
+    textArea.focus();
   },
   "caps lock": function () {
     LockState ? (LockState = false) : (LockState = true);
     document
       .querySelector(`.key[data-key-code="20"]`)
       .classList.toggle("green__key");
+    textArea.focus();
   },
   "Caps Lock": function () {
     LockState ? (LockState = false) : (LockState = true);
     document
       .querySelector(`.key[data-key-code="20"]`)
       .classList.toggle("green__key");
+    textArea.focus();
   },
   tab: function () {
     textArea.focus();
     fieldText.value += "\t";
     textArea.selectionStart += 1;
+    textArea.focus();
   },
   Tab: function () {
     textArea.focus();
     textArea.selectionStart += 1;
     fieldText.value += "\t";
+    textArea.focus();
   },
   Control: function (event) {
     event.shiftKey ? changeLanguage() : false;
+    textArea.focus();
   },
   Shift: function (event) {
     event.ctrlKey ? changeLanguage() : false;
+    textArea.focus();
   },
 };
 
@@ -462,7 +469,7 @@ function createKeyboard(type) {
     }
     keyboard += `</div>`;
   }
-  keyboard += `</div>`;
+  keyboard += `</div><div>Смена языка CTRL + SHIFT</div>`;
   body.innerHTML = keyboard;
 }
 

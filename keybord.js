@@ -433,6 +433,12 @@ const functionalityKey = {
     textArea.selectionStart += 1;
     fieldText.value += "\t";
   },
+  Control: function (event) {
+    event.shiftKey ? changeLanguage() : false;
+  },
+  Shift: function (event) {
+    event.ctrlKey ? changeLanguage() : false;
+  },
 };
 
 function createKeyboard(type) {
@@ -466,6 +472,9 @@ const fieldText = document.getElementById("field-for-text");
 
 function clickButton(e) {
   if (e.type !== "keydown") {
+    /*    if (e.target.innerText.length > 2) {
+      return false;
+    } */
     if (
       e.target.parentElement.className == "key" ||
       e.target.parentElement.className == "key green__key"
@@ -473,10 +482,12 @@ function clickButton(e) {
       if (functionalityKey[e.target.innerText.toLowerCase()]) {
         functionalityKey[e.target.innerText.toLowerCase()](textArea);
       } else {
-        LockState
-          ? (fieldText.value +=
-              e.target.parentElement.lastChild.innerHTML.toUpperCase())
-          : (fieldText.value += e.target.parentElement.lastChild.innerHTML);
+        if (e.target.innerText.length < 2) {
+          LockState
+            ? (fieldText.value +=
+                e.target.parentElement.lastChild.innerHTML.toUpperCase())
+            : (fieldText.value += e.target.parentElement.lastChild.innerHTML);
+        }
       }
     } else if (
       e.target.className == "key" ||
@@ -485,15 +496,19 @@ function clickButton(e) {
       if (functionalityKey[e.target.innerText.toLowerCase()]) {
         functionalityKey[e.target.innerText.toLowerCase()](textArea);
       } else {
-        LockState
-          ? (fieldText.value += e.target.lastChild.innerHTML.toUpperCase())
-          : (fieldText.value += e.target.lastChild.innerHTML);
+        if (e.target.innerText.length < 2) {
+          LockState
+            ? (fieldText.value += e.target.lastChild.innerHTML.toUpperCase())
+            : (fieldText.value += e.target.lastChild.innerHTML);
+        }
       }
     }
   } else {
-    LockState
-      ? (fieldText.value += e.key.toUpperCase())
-      : (fieldText.value += e.key);
+    if (e.key.length < 2) {
+      LockState
+        ? (fieldText.value += e.key.toUpperCase())
+        : (fieldText.value += e.key);
+    }
   }
   /*  textArea.focus(); */
 }
@@ -508,9 +523,11 @@ function removeStyleDownButton(e) {
   }
 }
 function clickButtonOnKeyboard(e) {
+  console.log(e);
   textArea.blur();
   let curEl = document.querySelector(`.key[data-key-code="${e.keyCode}"]`);
   if (!functionalityKey[curEl.firstChild.innerText.toLowerCase()]) {
+    functionalityKey[e.key] ? functionalityKey[e.key](e) : false;
     if (curEl) {
       curEl.classList.add("active");
       clickButton(e);
@@ -518,7 +535,7 @@ function clickButtonOnKeyboard(e) {
     }
   } else {
     textArea.focus();
-    functionalityKey[e.key]();
+    functionalityKey[e.key] ? functionalityKey[e.key](e) : false;
     curEl.classList.add("active");
     document.addEventListener("keyup", removeStyleDownButton);
   }

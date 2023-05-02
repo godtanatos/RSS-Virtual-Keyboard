@@ -469,7 +469,7 @@ function createKeyboard(type) {
     }
     keyboard += `</div>`;
   }
-  keyboard += `</div><div>Смена языка CTRL + SHIFT</div>`;
+  keyboard += `</div><div style = "color: red; text-align: center; ">Смена языка CTRL + SHIFT</div>`;
   body.innerHTML = keyboard;
 }
 

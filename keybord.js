@@ -524,7 +524,7 @@ function clickButton(e) {
         : (fieldText.value += e.key);
     }
   }
-  /*  textArea.focus(); */
+  textArea.focus();
 }
 document.addEventListener("keydown", clickButtonOnKeyboard);
 

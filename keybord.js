@@ -439,6 +439,7 @@ const functionalityKey = {
     textArea.focus();
   },
   Control: function (event) {
+    textArea.focus();
     event.shiftKey ? changeLanguage() : false;
     textArea.focus();
   },
@@ -447,8 +448,14 @@ const functionalityKey = {
     textArea.focus();
   },
 };
-
+let curenLanguage = "";
 function createKeyboard(type) {
+  if (localStorage.getItem("lang")) {
+    type = localStorage.getItem("lang");
+  } else {
+    localStorage.setItem("lang", "key");
+  }
+  curenLanguage = type;
   let keyboard = `<div class="container">
     <textarea id="field-for-text" class="text"></textarea>
     <div id="keyboard" class="keyboard">`;
@@ -503,7 +510,7 @@ function clickButton(e) {
       if (functionalityKey[e.target.innerText.toLowerCase()]) {
         functionalityKey[e.target.innerText.toLowerCase()](textArea);
       } else {
-        if (e.target.innerText.length < 2) {
+        if (e.target.firstChild.innerText.length < 2) {
           LockState
             ? (fieldText.value += e.target.lastChild.innerHTML.toUpperCase())
             : (fieldText.value += e.target.lastChild.innerHTML);
@@ -560,10 +567,11 @@ function del(textArea) {
   txField.splice(textArea.selectionStart, 1);
   textArea.value = txField.join("");
 }
-let curenLanguage = "eng";
 function changeLanguage() {
-  curenLanguage === "eng" ? (curenLanguage = "rus") : (curenLanguage = "eng");
-  if (curenLanguage === "eng") {
+  curenLanguage === "key"
+    ? (curenLanguage = "keyRus")
+    : (curenLanguage = "key");
+  if (curenLanguage === "key") {
     type = "key";
   } else {
     type = "keyRus";
@@ -588,6 +596,8 @@ function changeLanguage() {
   }
   keyboard += `</div>`;
   keyboardDom.innerHTML = keyboard;
+  localStorage.setItem("lang", type);
+  console.log(localStorage.getItem("lang"));
 }
 
 window.onkeydown = (evt) => {

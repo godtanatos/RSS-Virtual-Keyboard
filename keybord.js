@@ -537,7 +537,6 @@ function removeStyleDownButton(e) {
   }
 }
 function clickButtonOnKeyboard(e) {
-  console.log(e);
   textArea.blur();
   let curEl = document.querySelector(`.key[data-key-code="${e.keyCode}"]`);
   if (!functionalityKey[curEl.firstChild.innerText.toLowerCase()]) {
@@ -597,7 +596,6 @@ function changeLanguage() {
   keyboard += `</div>`;
   keyboardDom.innerHTML = keyboard;
   localStorage.setItem("lang", type);
-  console.log(localStorage.getItem("lang"));
 }
 
 window.onkeydown = (evt) => {

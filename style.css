@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    margin: 0;
+    padding-top: 50px;
+    background-color: aqua;
+}
+
+
+
+.container {
+    width: 100vw;
+    height: 100%;
+    /*     background-color: aqua; */
+}
+
+.text {
+    box-sizing: border-box;
+    display: block;
+    height: 20vh;
+    width: 100%;
+    padding: 1vh;
+    max-width: 70vw;
+    background-color: aliceblue;
+    margin: 0 auto;
+}
+
+.keyboard {
+    margin: 5vh auto;
+    height: 100%;
+    width: 500px;
+    /* background-color: white; */
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    row-gap: 0.2rem;
+}
+
+.key {
+    color: white;
+    font-size: 1.2rem;
+    background-color: darkslategray;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    vertical-align: center;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    text-transform: capitalize;
+}
+
+.green__key {
+    border: 1px solid red;
+    color: red;
+}
+
+
+.active,
+.key:hover {
+    background-color: rgb(196, 228, 228);
+    color: rgb(26, 19, 19);
+    border: 1px solid rgb(250, 250, 250);
+    cursor: pointer;
+}
+
+.active,
+.key:active {
+    border: 1px solid green;
+}
+
+.keyboard__row {
+    display: flex;
+    column-gap: 0.2rem;
+    row-gap: 0.2rem;
+}
+
+
+
+
+.keyboard__row:first-child .key:last-child {
+    flex-grow: 1;
+    text-transform: capitalize;
+}
+
+/********************************************************/
+
+
+.keyboard__row:nth-child(2) .key:first-child {
+    flex-grow: 1;
+}
+
+.keyboard__row:nth-child(2) .key:last-child {
+    text-transform: uppercase;
+}
+
+
+/********************************************************/
+
+
+.keyboard__row:nth-child(3) .key:first-child {
+    flex-grow: 1;
+}
+
+.keyboard__row:nth-child(3) .key:last-child {
+    flex-grow: 1;
+    text-transform: uppercase;
+}
+
+/********************************************************/
+
+
+.keyboard__row:nth-child(4) .key:first-child {
+    flex-grow: 1;
+}
+
+/* .keyboard__row:nth-child(4) .key:nth-child(13) {
+    transform: rotate(-90deg);
+} */
+
+/*********************************************************/
+
+.keyboard__row:nth-child(5) .key:nth-child(4) {
+    flex-grow: 3;
+}
+
+/* .keyboard__row:nth-child(5) .key:nth-child(7) {
+    transform: rotate(180deg);
+} */
+
+/* .keyboard__row:nth-child(5) .key:nth-child(8) {
+    transform: rotate(90deg);
+} */
+
+
+.key span:first-child {
+    align-self: center;
+    font-size: 1rem;
+
+}
+
+.key span:last-child {
+    align-self: center;
+    justify-self: end;
+
+}
